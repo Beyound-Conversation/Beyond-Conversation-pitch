@@ -1,6 +1,6 @@
 'use client';
 import { schedule } from '../data/schedule';
-import { ArrowUpRight, Download } from 'lucide-react'; // Added icons for UI elements
+import { ArrowUpRight, Download } from 'lucide-react';
 
 const TopicCard = ({ displayDate, title, desc, icon: Icon, index }) => (
   <div 
@@ -9,7 +9,6 @@ const TopicCard = ({ displayDate, title, desc, icon: Icon, index }) => (
   >
     <div className="flex justify-between items-start mb-6">
       <div className="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center text-white/80 border border-white/5 transition-all duration-500 group-hover:bg-brand-orange/20 group-hover:border-brand-orange/40 group-hover:text-brand-orange group-hover:scale-110">
-        {/* Render the Lucide Icon */}
         <Icon strokeWidth={1.5} size={24} />
       </div>
       <span className="px-3 py-1 rounded-full border border-white/10 text-[10px] font-bold tracking-widest uppercase text-white/40 group-hover:text-brand-orange group-hover:border-brand-orange/30 transition-colors">
@@ -43,10 +42,16 @@ export default function Topics() {
               12 months. 12 shifts in perspective. A complete curriculum for the modern mind.
             </p>
           </div>
-          <button className="px-6 py-3 rounded-full border border-white/20 hover:bg-white hover:text-black transition-all text-sm font-bold uppercase tracking-wider flex items-center gap-2 group">
+          
+          {/* UPDATED: Download Button functionality */}
+          <a 
+            href="/syllabus.pdf" 
+            download="Beyond_Conversation_Syllabus.pdf"
+            className="px-6 py-3 rounded-full border border-white/20 hover:bg-white hover:text-black transition-all text-sm font-bold uppercase tracking-wider flex items-center gap-2 group"
+          >
             <Download size={16} className="group-hover:translate-y-0.5 transition-transform" />
             Download Plan (PDF)
-          </button>
+          </a>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

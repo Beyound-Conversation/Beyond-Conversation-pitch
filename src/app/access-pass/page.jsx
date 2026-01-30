@@ -4,7 +4,6 @@ import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import StripePaymentForm from '../../components/StripePaymentForm';
 import { Check, CreditCard, Globe, Lock, Loader2 } from 'lucide-react';
-// ❌ REMOVED: import PaystackPop from '@paystack/inline-js'; (This caused the crash)
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
 
@@ -36,6 +35,7 @@ export default function AccessPassPage() {
       })
       .then((res) => res.json())
       .then((data) => setClientSecret(data.clientSecret))
+      .catch((err) => console.error("Stripe Error:", err))
       .finally(() => setLoading(false));
     }
   }, [paymentMethod, selectedPlan, email]);
@@ -43,7 +43,7 @@ export default function AccessPassPage() {
   const handlePaystackPayment = async () => {
     setLoading(true);
     try {
-      // ✅ FIX: Dynamically import Paystack only when needed (on the client)
+      // Dynamic import to prevent window error
       const PaystackPop = (await import('@paystack/inline-js')).default;
 
       const res = await fetch('/api/payment/paystack/initialize', {
@@ -90,11 +90,14 @@ export default function AccessPassPage() {
   };
 
   return (
-    <main className="min-h-screen bg-brand-dark text-white selection:bg-brand-orange selection:text-white">
+    <main className="min-h-screen bg-brand-dark text-white selection:bg-brand-orange selection:text-white flex flex-col">
       <Navbar />
       
-      <div className="pt-32 pb-20 px-6 max-w-7xl mx-auto">
-        <div className="text-center mb-16 reveal">
+      {/* Added flex-grow so footer pushes to bottom if content is short */}
+      <div className="pt-32 pb-20 px-6 max-w-7xl mx-auto w-full flex-grow">
+        
+        {/* REMOVED 'reveal' class */}
+        <div className="text-center mb-16">
           <h1 className="text-5xl md:text-6xl font-black mb-6">Secure Your Seat</h1>
           <p className="text-white/60 text-lg max-w-2xl mx-auto">
             Join the inner circle. Full access to live sessions, recordings, and the community archives.
@@ -103,7 +106,8 @@ export default function AccessPassPage() {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
           
-          <div className="space-y-6 reveal delay-100">
+          {/* REMOVED 'reveal' class */}
+          <div className="space-y-6">
             <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
               <span className="w-6 h-6 rounded-full bg-brand-orange text-black flex items-center justify-center text-xs font-bold">1</span>
               Select Duration
@@ -135,7 +139,8 @@ export default function AccessPassPage() {
             </div>
           </div>
 
-          <div className="glass-card p-8 rounded-4xl reveal delay-200 min-h-125">
+          {/* REMOVED 'reveal' class */}
+          <div className="glass-card p-8 rounded-4xl min-h-[500px]">
             <h3 className="text-xl font-bold mb-6 flex items-center gap-2">
               <span className="w-6 h-6 rounded-full bg-white text-black flex items-center justify-center text-xs font-bold">2</span>
               Payment Method
