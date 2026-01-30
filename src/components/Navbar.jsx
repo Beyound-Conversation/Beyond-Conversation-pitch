@@ -1,5 +1,6 @@
 'use client';
-import Image from 'next/image'; // Import the Image component
+import Image from 'next/image';
+import Link from 'next/link'; // ✅ ADDED: Import Link
 import { useActiveSection } from '../hooks/useActiveSection';
 
 export default function Navbar() {
@@ -20,10 +21,9 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto flex justify-between items-center">
         {/* Logo Section */}
         <div className="flex items-center gap-3">
-          {/* Replaced the "B" box with your Image */}
           <div className="relative h-20 w-32 md:w-40">
             <Image 
-              src="/images/logo.png" // Ensure your file is in public/images/logo.png
+              src="/images/logo.png"
               alt="Beyond Conversation Logo"
               fill
               className="object-contain object-left"
@@ -45,10 +45,12 @@ export default function Navbar() {
           ))}
         </div>
 
-        {/* CTA Button */}
-        <button className="bg-brand-orange hover:bg-orange-500 text-white px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider shadow-[0_0_20px_rgba(255,95,0,0.3)] transition-all hover:scale-105 active:scale-95">
-          Access Pass
-        </button>
+        {/* CTA Button - ✅ UPDATED: Wrapped in Link */}
+        <Link href="/access-pass">
+          <button className="bg-brand-orange hover:bg-orange-500 text-white px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider shadow-[0_0_20px_rgba(255,95,0,0.3)] transition-all hover:scale-105 active:scale-95">
+            Access Pass
+          </button>
+        </Link>
       </div>
     </nav>
   );
