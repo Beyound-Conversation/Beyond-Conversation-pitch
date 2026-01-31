@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function Hero() {
   return (
@@ -27,9 +28,13 @@ export default function Hero() {
           </p>
           
           <div className="flex flex-wrap gap-4">
-            <button className="bg-brand-orange hover:bg-orange-500 text-white px-8 py-4 rounded-xl text-lg font-bold shadow-[0_10px_40px_rgba(255,95,0,0.3)] transition-all hover:-translate-y-1">
-              Start The Journey
-            </button>
+            {/* UPDATED: Start The Journey links to Access Pass */}
+            <Link href="/access-pass">
+              <button className="bg-brand-orange hover:bg-orange-500 text-white px-8 py-4 rounded-xl text-lg font-bold shadow-[0_10px_40px_rgba(255,95,0,0.3)] transition-all hover:-translate-y-1">
+                Start The Journey
+              </button>
+            </Link>
+            
             <button className="glass hover:bg-white/5 text-white px-8 py-4 rounded-xl text-lg font-bold transition-all border-white/10 hover:border-white/30">
               Watch Trailer
             </button>
@@ -42,11 +47,12 @@ export default function Hero() {
           
           <div className="relative aspect-square rounded-[2.5rem] overflow-hidden glass p-3 border-white/10 rotate-2 group-hover:rotate-0 transition-transform duration-700 ease-out">
             <div className="w-full h-full rounded-4xl overflow-hidden bg-black relative">
-              <Image
-                src="/images/host.png"
-                alt="Eric Gugua"
+              <Image 
+                src="/images/host.png" 
+                alt="Eric Gugua" 
                 fill
-                className="w-full h-full object-cover grayscale group-hover:grayscale-0 scale-105 group-hover:scale-100 transition-all duration-1000"
+                className="object-cover grayscale group-hover:grayscale-0 scale-105 group-hover:scale-100 transition-all duration-1000"
+                priority
               />
               <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent pointer-events-none" />
             </div>
