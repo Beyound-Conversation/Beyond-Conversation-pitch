@@ -1,0 +1,1 @@
+Beyond Conversation: A unified platform for purchasing tickets and streaming live events. Built with React, Next.js, and Tailwind CSS for a seamless user experience.
