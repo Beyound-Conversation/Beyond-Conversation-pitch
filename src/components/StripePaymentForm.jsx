@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { PaymentElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import { Lock, Loader2 } from 'lucide-react';
 
-export default function StripePaymentForm({ price }) {
+export default function StripePaymentForm({ price, email, planId }) {
   const stripe = useStripe();
   const elements = useElements();
   const [message, setMessage] = useState(null);
@@ -19,8 +19,8 @@ export default function StripePaymentForm({ price }) {
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        // Redirect to a success page or back to access-pass
-        return_url: `${window.location.origin}/access-pass?status=success`,
+        // Redirect to a success page or back to access-pass with email and plan metadata
+        return_url: `${window.location.origin}/access-pass?status=success&email=${encodeURIComponent(email)}&plan=${encodeURIComponent(planId)}`,
       },
     });
 

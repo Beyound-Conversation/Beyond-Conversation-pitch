@@ -1,7 +1,12 @@
+'use client';
+import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { X, Play } from 'lucide-react';
 
 export default function Hero() {
+  const [showTrailer, setShowTrailer] = useState(false);
+
   return (
     <section id="hero" className="relative min-h-screen flex flex-col justify-center pt-32 px-6">
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -35,8 +40,11 @@ export default function Hero() {
               </button>
             </Link>
             
-            <button className="glass hover:bg-white/5 text-white px-8 py-4 rounded-xl text-lg font-bold transition-all border-white/10 hover:border-white/30">
-              Watch Trailer
+            <button 
+              onClick={() => setShowTrailer(true)}
+              className="glass hover:bg-white/5 text-white px-8 py-4 rounded-xl text-lg font-bold transition-all border-white/10 hover:border-white/30 flex items-center gap-2"
+            >
+              <Play size={18} className="text-brand-orange" /> Watch Trailer
             </button>
           </div>
         </div>
@@ -60,6 +68,30 @@ export default function Hero() {
         </div>
         
       </div>
+
+      {/* --- TRAILER MODAL --- */}
+      {showTrailer && (
+        <div className="fixed inset-0 bg-black/90 backdrop-blur-md z-[100] flex items-center justify-center p-4 md:p-10">
+          <div className="relative w-full max-w-5xl aspect-video glass rounded-3xl border border-white/15 overflow-hidden shadow-2xl">
+            {/* Close Button */}
+            <button 
+              onClick={() => setShowTrailer(false)}
+              className="absolute top-4 right-4 z-50 w-10 h-10 rounded-full bg-black/50 border border-white/15 flex items-center justify-center text-white/75 hover:text-white transition-colors hover:scale-105"
+            >
+              <X size={20} />
+            </button>
+
+            {/* Video Player */}
+            <video
+              src="https://assets.mixkit.co/videos/preview/mixkit-futuristic-digital-particle-flow-40081-large.mp4"
+              controls
+              autoPlay
+              playsInline
+              className="w-full h-full object-cover"
+            />
+          </div>
+        </div>
+      )}
     </section>
   );
 }
